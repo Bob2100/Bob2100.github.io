@@ -1,0 +1,48 @@
+<div b-target='catalog' class='b-tree'>
+  <ul class='first-level'>
+    <li>
+      <div class='title'>
+        <span class='icon'>+</span>
+        <a href='#/content/persistWriting'>坚持写作</a>
+      </div>
+      <ul class='second-level'>
+        <li>
+          <div>
+            <span class='icon'>-</span>
+            <a href='#/content/persistWriting'>第二节</a>
+          </div>
+        </li>
+        <li>
+          <div>
+            <span class='icon'>-</span>
+            <a href='#/content/persistWriting'>第三节</a>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <div>
+        <span class='icon'>-</span>
+        <a href='#/content/noComptible'>第二篇文章</a>
+      </div>
+    </li>
+    <li>
+      <div>
+        <span class='icon'>-</span>
+        <a href='#/content/persistWriting'>第三篇文章</a>
+      </div>
+    </li>
+    <li>
+      <div>
+        <span class='icon'>-</span>
+        <a href='#/content/persistWriting'>第四篇文章</a>
+      </div>
+    </li>
+  </ul>
+</div>
+<script>
+  $('.b-tree .title').click(function(){
+    $(this).next().toggle();
+    $(this).children('.icon').text() == '-' ? $(this).children('.icon').text('+') : $(this).children('.icon').text('-');
+  });
+</script>
