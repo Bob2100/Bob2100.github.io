@@ -8,12 +8,6 @@
   function Router() {
     //保存所有注册的路由
     this.routers = {};
-
-    //切换页面前执行的函数
-    this.before = null;
-
-    //切换页面后执行的函数
-    this.after = null;
   }
 
   Router.prototype = {
@@ -37,26 +31,30 @@
     },
     //初始化路由器
     init: function(){
-      let that = this;
       //注册所有路由,以url为key，以parent为value,保存到routers中
       for(let i = 0; i < arguments.length; i++){
         this.routers[arguments[i].url] = arguments[i].parent;
       }
       //监听hash
-      window.addEventListener('hashchange', function() {
-        that.urlChange();
+      window.addEventListener('hashchange', () => {
+        this.urlChange();
       });
 
       //页面加载
-      window.addEventListener('load', function() {
-        that.urlChange();
+      window.addEventListener('load', () => {
+        let aHref = this.getFullRequest();
+        aHref = '#' + aHref.path;
+        //刷新页面，header上的样式依然存在
+        $(`.nav-item a[href='${aHref}']`).addClass('active');
+        this.urlChange();
       });
     },
     urlChange: function(){
       let fullReq = this.getFullRequest();
+
       //发起ajax抓取请求的html
       $.ajax({
-        url: fullReq.path,
+        url: fullReq.path + '.html',
         type: 'get',
         success: data => {
           let targetId = $(data).attr('b-target');
