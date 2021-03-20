@@ -5,40 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>当其无</title>
-  <link rel="stylesheet" type="text/css" href="css/index.css">
-  <link rel="stylesheet" type="text/css" href="css/catalog.css">
   <style>
-    
+
   </style>
 </head>
 
 <body>
-  <header>
-    <ul>
-      <li class='nav-item'><a href='#/catalog/main'>首页</a></li>
-      <li class='nav-item'><a href="#/catalog/readNotes">阅读笔记</a></li>
-      <li class='nav-item'><a href="#/catalog/thinkNotes">随想录</a></li>
-      <li class='nav-item'><a href="#/catalog/investNotes">投资札记</a></li>
-    </ul>
-  </header>
-  <div id='catalog'></div>
-  <div id='content'></div>
-
-  <script src='jquery/jquery-3.3.1.js'></script>
-  <script src='js/biu-router.js'></script>
-  <script src='js/index.js'></script>
-  <script>
-    //注册路由，第一个对象为默认的首页，即url上没有hash的时候访问的页面
-    //所有的目录链接都需要在这里配置一下
-    router.init(
-      {url: '/catalog/main', parent: '/catalog/main'},
-      {url: '/catalog/readNotes', parent: '/catalog/readNotes'},
-      {url: '/catalog/thinkNotes', parent: '/catalog/thinkNotes'},
-      {url: '/catalog/investNotes', parent: '/catalog/investNotes'},
-      {url: '/content/persistWriting', parent: '/catalog/readNotes'},
-      {url: '/content/noComptible', parent: '/catalog/readNotes'}
-    );
-  </script>
 </body>
 
 </html>
