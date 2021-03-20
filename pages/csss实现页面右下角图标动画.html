@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .icon-container {
+      position: fixed;
+      right: 50px;
+      bottom: 50px;
+      transition: transform 0.3s;
+    }
+
+    .icon-container:nth-of-type(1) {
+      z-index: 1;
+    }
+
+    img {
+      display: block;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    img:hover {
+      transform: scale(1.3);
+    }
+
+    .icon-hidden {
+      visibility: hidden;
+    }
+
+    .icon-pause {
+      margin-top: 40px;
+    }
+
+    .icon-container {
+      transform-origin: 25px 115px;
+    }
+
+    .icon-rotate:nth-of-type(2) {
+      transform: rotate(-45deg);
+    }
+
+    .icon-rotate:nth-of-type(3) {
+      transform: rotate(-90deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="icon-container">
+    <img class="icon-check" src="./imgs/arrow-repeat.svg" alt="">
+    <img class="icon-pause" src="./imgs/app.svg" alt="">
+  </div>
+  <div class="icon-container icon-close-container">
+    <img class="icon-alarm icon-hidden" src="./imgs/alarm.svg" alt="">
+    <img class="icon-pause icon-hidden" class="icon-hidden" src="./imgs/app.svg" alt="">
+  </div>
+  <div class="icon-container icon-plus-container">
+    <img class="icon-repeat icon-hidden" src="./imgs/arrow-down-circle.svg" alt="">
+    <img class="icon-pause icon-hidden" class="icon-hidden" src="./imgs/app.svg" alt="">
+  </div>
+</body>
+
+<script>
+  const closeCon = document.querySelector('.icon-close-container');
+  const alarmIcon = closeCon.querySelector('.icon-alarm');
+
+  const plusCon = document.querySelector('.icon-plus-container');
+  const repeatIcon = document.querySelector('.icon-repeat');
+
+
+  let isRoated = false;
+
+  document.querySelector('.icon-check').addEventListener('click', () => {
+    if (isRoated) {
+      isRoated = false;
+      closeCon.classList.remove('icon-rotate');
+      plusCon.classList.remove('icon-rotate');
+
+      setTimeout(() => {
+        alarmIcon.classList.add('icon-hidden');
+        repeatIcon.classList.add('icon-hidden');
+      }, 300);
+
+    } else {
+      isRoated = true;
+      closeCon.classList.add('icon-rotate');
+      plusCon.classList.add('icon-rotate');
+
+      alarmIcon.classList.remove('icon-hidden');
+      repeatIcon.classList.remove('icon-hidden');
+    }
+  });
+</script>
+
+</html>
