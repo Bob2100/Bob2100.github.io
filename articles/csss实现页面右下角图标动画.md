@@ -182,7 +182,6 @@ img:nth-of-type(2){
 也就是说`transform-origin`可以改变元素转动的圆心，`0 0`是元素的左上角，`200px 0`表示从`0 0`沿着`x`轴向右偏移了200像素。
 
 ## 点击弹出，再点击收起
-没有过度动画效果
 ![img](../imgs/bug1.gif)
 ```html
 <body>
@@ -204,12 +203,15 @@ img:nth-of-type(2){
 </body>
 ```
 ```javascript
+// 大体思路就是判断容器没有icon-rotate时就加上，有就移除
 const closeContainer = document.querySelector('.icon-close-container');
 const checkContainer = document.querySelector('.icon-check-container');
 
+// 声明一个变量，记录容器有还是没有icon-rotate
 let isRoated = false;
 
 document.querySelector('.icon-plus').addEventListener('click', () => {
+  // 有就移除，没有就加上
   if (isRoated) {
     isRoated = false;
     closeContainer.classList.remove('icon-rotate');
@@ -221,6 +223,39 @@ document.querySelector('.icon-plus').addEventListener('click', () => {
   }
 });
 ```
+我们发现并没有过度效果，现在我们来加上过度效果：
+![img](../imgs/transition.gif)
+```css
+.icon-container {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  /* 过度样式，使transform样式被加上的过度时间为0.3秒 */
+  transition: transform 0.3s;
+}
+```
+发现有闪动的问题，这是因为
+```css
+/* transform-origin可以设置变形的基础点。transform-origin：0 0 是元素的左上角，这里的意思是从左上角开始，沿着x轴向右移动25像素，沿着y轴向下移动115像素，这样就把旋转的圆心从中心位置改为了暂停图标的中心 */
+.icon-rotate {
+  transform-origin: 25px 115px;
+}
+```
+我们用脚本动态添加和移除`icon-rotate`，导致旋转的圆心在中心和`25px 115px`之间来回切换，我们应该把圆心固定住：
+```css
+.icon-rotate {
+  /* transform-origin: 25px 115px; */
+}
+.icon-container {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  transition: transform 0.3s;
+  /* 把该样式写到这里，这样圆心就固定了 */
+  transform-origin: 25px 115px;
+}
+```
+
 
 
 
