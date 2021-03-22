@@ -37,14 +37,16 @@
 ![img](../imgs/fixed.png)
 
 ```css
-/* 使图标容器采用固定定位，并且距离页面右边是50像素，距离页面底部也是50像素，这样无论页面大小如何变化或页面如何滚动，我们的图标就始终能保持在页面右下角。*/
+/* 使图标容器采用固定定位，并且距离页面右边是50像素，距离页面底部也是50像素，
+这样无论页面大小如何变化或页面如何滚动，我们的图标就始终能保持在页面右下角。*/
 .icon-container {
   position: fixed;
   right: 50px;
   bottom: 50px;
 }
 
-/* :nth-of-type(n)的功能是选择当前元素是第n个子元素。我们的图标容器都是body的子元素，那么.icon-container:nth-of-type(1)也就是选择了第一个图标容器，设置z-index，使它始终位于其他图标容器的上方。*/
+/* :nth-of-type(n)的功能是选择当前元素是第n个子元素。我们的图标容器都是body的子元素，
+那么.icon-container:nth-of-type(1)也就是选择了第一个图标容器，设置z-index，使它始终位于其他图标容器的上方。*/
 .icon-container:nth-of-type(1) {
   z-index: 1;
 }
@@ -69,7 +71,9 @@ img:nth-of-type(2){
     <img src="../imgs/plus.png" alt="">
     <img src="../imgs/pause.png" alt="">
   </div>
-  <!-- 注意我们给第二和第三个图标容器分别加了一个类icon-rotate。为什么要再加一个类呢？因为我们后面会用脚本在点击时动态地给它们添加这个类，如果直接在icon-container里面写样式，做动态添加就不太方便了 -->
+  <!-- 注意我们给第二和第三个图标容器分别加了一个类icon-rotate。
+  为什么要再加一个类呢？因为我们后面会用脚本在点击时动态地给它们添加这个类，
+  如果直接在icon-container里面写样式，做动态添加就不太方便了 -->
   <div class="icon-rotate icon-container">
     <img src="../imgs/close.png" alt="">
     <img src="../imgs/pause.png" alt="">
@@ -83,7 +87,9 @@ img:nth-of-type(2){
 ```
 样式：
 ```css
-/* transform是变形属性，rotate()是一种变形函数，意思是以元素的中心为原点把元素旋转一定的角度，正数顺时针、负数逆时针 */
+/* transform是变形属性，rotate()是一种变形函数，
+意思是以元素的中心为原点把元素旋转一定的角度，
+正数顺时针、负数逆时针 */
 .icon-rotate:nth-of-type(2) {
   transform: rotate(-45deg);
 } 
@@ -92,7 +98,9 @@ img:nth-of-type(2){
   transform: rotate(-90deg);
 }
 
-/* transform-origin可以设置变形的基础点。transform-origin：0 0 是元素的左上角，这里的意思是从左上角开始，沿着x轴向右移动25像素，沿着y轴向下移动115像素，这样就把旋转的圆心从中心位置改为了暂停图标的中心 */
+/* transform-origin可以设置变形的基础点。transform-origin：0 0 是元素的左上角，
+这里的意思是从左上角开始，沿着x轴向右移动25像素，沿着y轴向下移动115像素，
+这样就把旋转的圆心从中心位置改为了暂停图标的中心 */
 .icon-rotate {
   transform-origin: 25px 115px;
 }
@@ -122,7 +130,9 @@ img:nth-of-type(2){
 ```
 ![img](../imgs/center.png)
 ```css
-/* 中央元素也是固定定位，背景色为黑色，并且半透明，宽高分别为100像素，距离浏览器左边和上边也同样都是100像素，这样设置后，中央元素的右下角恰好是外部元素的中心 */
+/* 中央元素也是固定定位，背景色为黑色，并且半透明，宽高分别为100像素，
+距离浏览器左边和上边也同样都是100像素，这样设置后，
+中央元素的右下角恰好是外部元素的中心 */
 .center {
   position: fixed;
   background: black;
@@ -136,7 +146,8 @@ img:nth-of-type(2){
 ![img](../imgs/inner.png)
 ```css
 .inner {
-  /* 内部元素背景色设置为蓝色，也是半透明，宽高和外部元素一样都是200像素，这样内部元素和外部元素一样，可以很方便的看出内部元素的中心 */
+  /* 内部元素背景色设置为蓝色，也是半透明，宽高和外部元素一样都是200像素，
+  这样内部元素和外部元素一样，可以很方便的看出内部元素的中心 */
   background: blue;
   opacity: 0.5;
   width: 200px;
@@ -233,7 +244,9 @@ document.querySelector('.icon-plus').addEventListener('click', () => {
 ```
 发现有闪动的问题，这是因为
 ```css
-/* transform-origin可以设置变形的基础点。transform-origin：0 0 是元素的左上角，这里的意思是从左上角开始，沿着x轴向右移动25像素，沿着y轴向下移动115像素，这样就把旋转的圆心从中心位置改为了暂停图标的中心 */
+/* transform-origin可以设置变形的基础点。transform-origin：0 0 是元素的左上角，
+这里的意思是从左上角开始，沿着x轴向右移动25像素，沿着y轴向下移动115像素，
+这样就把旋转的圆心从中心位置改为了暂停图标的中心 */
 .icon-rotate {
   transform-origin: 25px 115px;
 }
