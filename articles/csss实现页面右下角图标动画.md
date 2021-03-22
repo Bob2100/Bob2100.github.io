@@ -2,7 +2,7 @@
 
 如下图所示：
 
-![img](../imgs/transition_icon.gif)
+![img](../imgs/you.gif)
 
 上面动图的图标是我随便找的几个，具体网页设计时可以由UI设计人员提供。
 
@@ -242,6 +242,8 @@ document.querySelector('.icon-plus').addEventListener('click', () => {
 }
 ```
 我们用脚本动态添加和移除`icon-rotate`，导致旋转的圆心在中心和`25px 115px`之间来回切换，我们应该把圆心固定住：
+
+![img](../imgs/fiexed.gif)
 ```css
 .icon-rotate {
   /* transform-origin: 25px 115px; */
@@ -251,10 +253,71 @@ document.querySelector('.icon-plus').addEventListener('click', () => {
   right: 50px;
   bottom: 50px;
   transition: transform 0.3s;
-  /* 把该样式写到这里，这样圆心就固定了 */
+  /* 把该样式写到这里，这样圆心就不会随着icon-rotate的添加和移除而改变了了 */
   transform-origin: 25px 115px;
 }
 ```
+到这里我们的功能基本实现了，但是仔细观察还有一个问题，我们的弹出图标是藏在后面的，并没有真正的隐藏，下面来把它们隐藏掉：
+
+![img](../imgs/none.gif)
+```html
+<body>
+  <div class="icon-container">
+    <img class="icon-plus" src="../imgs/plus.png" alt="">
+    <img src="../imgs/pause.png" alt="">
+  </div>
+  <!-- 添加一个样式 icon-hidden-->
+  <div class="icon-close-container icon-container icon-hidden">
+    <img src="../imgs/close.png" alt="">
+    <!-- 占位图标是永远隐藏的 -->
+    <img  src="../imgs/pause.png" alt="" style="visibility: hidden;">
+  </div>
+  <!-- 添加一个样式 icon-hidden-->
+  <div class="icon-check-container icon-container icon-hidden">
+    <img src="../imgs/check.png" alt="">
+    <!-- 占位图标是永远隐藏的 -->
+    <img src="../imgs/pause.png" alt="" style="visibility: hidden;">
+  </div>
+</body>
+```
+```css
+.icon-hidden {
+  visibility: hidden;
+}
+```
+```javascript
+if (isRoated) {
+  isRoated = false;
+  closeContainer.classList.remove('icon-rotate');
+  checkContainer.classList.remove('icon-rotate');
+  // 添加隐藏
+  closeContainer.classList.add('icon-hidden');
+  checkContainer.classList.add('icon-hidden');
+} else {
+  isRoated = true;
+  // 移除隐藏
+  closeContainer.classList.remove('icon-hidden');
+  checkContainer.classList.remove('icon-hidden');
+  closeContainer.classList.add('icon-rotate');
+  checkContainer.classList.add('icon-rotate');
+}
+```
+发现收起的动画不见了，这是什么原因呢？仔细看下上面的代码，移除动画效果，我们直接就添加隐藏了，也就是动画还没走完，我们就把它隐藏了，我们来修改一下：
+![img](../imgs/you.gif)
+```javascript
+if (isRoated) {
+  isRoated = false;
+  closeContainer.classList.remove('icon-rotate');
+  checkContainer.classList.remove('icon-rotate');
+  // 添加隐藏
+  setTimeout(() => {
+    closeContainer.classList.add('icon-hidden');
+    checkContainer.classList.add('icon-hidden');
+  }, 300);
+} else {
+```
+给一个300毫秒的延迟，正好动画走完隐藏掉。至此我们的功能就圆满完成了。
+
 
 
 
