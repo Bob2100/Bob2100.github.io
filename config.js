@@ -1,2 +1,2 @@
 var server = '/map'
-var workDiaryUrl = 'https://mp.weixin.qq.com/s?__biz=MzU1NzY1NTk5MQ==&mid=2247484646&idx=2&sn=0733252ca40cd3bb6bfa6f20d896d8da&chksm=fc33363ecb44bf28c6cf27e0fb7c18254fe858e3c98a1c31a9bacfef9431fb60bbae94b925ae&token=771403041&lang=zh_CN#rd'
+var workDiaryUrl = 'https://mp.weixin.qq.com/s/Lh9LvRCHmoAfpDI_cuPaEw'
